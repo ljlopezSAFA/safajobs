@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "empresa", schema = "safajobs", catalog = "postgres")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"ofertasEmpleo"})
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
