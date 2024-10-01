@@ -1,5 +1,6 @@
 package com.sl.safajobs;
 
+import com.sl.safajobs.dtos.EmpresaDTO;
 import com.sl.safajobs.modelos.Empresa;
 import com.sl.safajobs.servicios.EmpresaService;
 import org.junit.jupiter.api.Test;
@@ -50,8 +51,8 @@ public class EmpresaTest {
 
     @Test
     void testBuscarTodasEmpresas(){
-        List<Empresa> empresas = empresaService.getAll();
-        for(Empresa e: empresas){
+        List<EmpresaDTO> empresas = empresaService.getAll();
+        for(EmpresaDTO e: empresas){
             System.out.println(e.getNombre());
         }
     }

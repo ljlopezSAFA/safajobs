@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -34,15 +35,15 @@ public class Perfil {
     @Column(name = "dni")
     private String dni;
 
-    @Column(name = "fecha_nacmiento")
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
 
-    @ManyToMany
-    @JoinTable(name = "aptitud_perfil",
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Aptitud.class)
+    @JoinTable(name = "aptitud_perfil", schema = "safajobs", catalog = "postgres",
             joinColumns = {@JoinColumn(name = "id_perfil", nullable = false)} ,
             inverseJoinColumns ={@JoinColumn(name = "id_aptitud", nullable = false)})
-    private Set<Aptitud> aptitudes;
+    private Set<Aptitud> aptitudes = new HashSet<>(0);
 
 
 }

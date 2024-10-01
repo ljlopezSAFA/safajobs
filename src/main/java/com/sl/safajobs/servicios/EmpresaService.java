@@ -1,10 +1,12 @@
 package com.sl.safajobs.servicios;
 
+import com.sl.safajobs.dtos.EmpresaDTO;
 import com.sl.safajobs.modelos.Empresa;
 import com.sl.safajobs.repositorios.EmpresaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,8 +34,21 @@ public class EmpresaService {
      *
      * @return
      */
-    public List<Empresa> getAll(){
-        return empresaRepository.findAll();
+    public List<EmpresaDTO> getAll(){
+
+        List<EmpresaDTO> empresaDTOS = new ArrayList<>();
+        List<Empresa> empresas =  empresaRepository.findAll();
+        for(Empresa empresa: empresas){
+            EmpresaDTO dto = new EmpresaDTO();
+            dto.setId(empresa.getId());
+            dto.setNombre(empresa.getNombre());
+            dto.setCif(empresa.getCif());
+            dto.setEsTecnologica(empresa.getEsTecnologica());
+            dto.setFechaFundacion(empresa.getFechaFundacion());
+            empresaDTOS.add(dto);
+        }
+
+        return empresaDTOS;
     }
 
 
