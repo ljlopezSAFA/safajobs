@@ -4,7 +4,6 @@ import com.sl.safajobs.dto.PerfilCrearDTO;
 import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
-import com.sl.safajobs.repositorios.AptitudRepository;
 import com.sl.safajobs.repositorios.PerfilRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -18,10 +18,11 @@ public class EmpresaController {
 
     private EmpresaService empresaService;
 
-
     @GetMapping
     public List<EmpresaDTO> getEmpresas(){
         return empresaService.getAll();
     }
+
+
 
 }

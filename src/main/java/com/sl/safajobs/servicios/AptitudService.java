@@ -20,7 +20,7 @@ public class AptitudService {
      * @param id
      * @return
      */
-    public Aptitud getById(Integer id){
+    public Aptitud getById(Integer id) {
         return aptitudRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class AptitudService {
      *
      * @return
      */
-    public List<Aptitud> getAllAptitudes(){
+    public List<Aptitud> getAllAptitudes() {
         return aptitudRepository.findAll();
     }
 
@@ -40,7 +40,7 @@ public class AptitudService {
      * @param aptitud
      * @return
      */
-    public Aptitud guardar(Aptitud aptitud){
+    public Aptitud guardar(Aptitud aptitud) {
         return aptitudRepository.save(aptitud);
     }
 
@@ -50,8 +50,14 @@ public class AptitudService {
      *
      * @param id
      */
-    public void eliminar(Integer id){
-        aptitudRepository.deleteById(id);
+    public String eliminar(Integer id) {
+        try {
+            aptitudRepository.deleteById(id);
+            return "Aptitud eliminado";
+        } catch (Exception e) {
+            return "No se ha podido eliminar la aptitud";
+        }
+
     }
 
 
