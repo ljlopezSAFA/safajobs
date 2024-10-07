@@ -1,5 +1,6 @@
 package com.sl.safajobs;
 
+import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.servicios.AptitudService;
@@ -25,8 +26,8 @@ public class PerfilTest {
     @Test
     @Transactional
     void testFindALL(){
-        List<Perfil> perfils = perfilService.getAll();
-        for(Perfil p : perfils){
+        List<PerfilDTO> perfils = perfilService.getAll();
+        for(PerfilDTO p : perfils){
             System.out.println(p.toString());
         }
     }
@@ -41,8 +42,8 @@ public class PerfilTest {
         perfil.setFechaNacimiento(LocalDate.now());
         perfil.setMail("jmaldonado@safareyes.es");
 
-        Perfil perfilguardado = perfilService.guardar(perfil);
-        System.out.println(perfilguardado.toString());
+//        Perfil perfilguardado = perfilService.guardar(perfil);
+//        System.out.println(perfilguardado.toString());
 
     }
 
@@ -61,8 +62,8 @@ public class PerfilTest {
         perfil.getAptitudes().add(aptitud);
 
 
-        Perfil perfilguardado = perfilService.guardar(perfil);
-        System.out.println(perfilguardado.toString());
+//        Perfil perfilguardado = perfilService.guardar(perfil);
+//        System.out.println(perfilguardado.toString());
 
     }
 
