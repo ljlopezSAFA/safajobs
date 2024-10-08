@@ -31,7 +31,7 @@ public class OfertaEmpleo {
     @Column(name = "remuneracion")
     private Double remuneracion;
 
-    @Column(name = "remunercacion_minima")
+    @Column(name = "remuneracion_minima")
     private Double remuneracionMinima;
 
     @Column(name = "remuneracion_maxima")

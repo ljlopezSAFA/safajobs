@@ -1,6 +1,6 @@
 package com.sl.safajobs.servicios;
 
-import com.sl.safajobs.dtos.EmpresaDTO;
+import com.sl.safajobs.dto.EmpresaDTO;
 import com.sl.safajobs.modelos.Empresa;
 import com.sl.safajobs.repositorios.EmpresaRepository;
 import lombok.AllArgsConstructor;

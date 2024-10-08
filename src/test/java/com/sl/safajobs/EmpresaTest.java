@@ -1,6 +1,6 @@
 package com.sl.safajobs;
 
-import com.sl.safajobs.dtos.EmpresaDTO;
+import com.sl.safajobs.dto.EmpresaDTO;
 import com.sl.safajobs.modelos.Empresa;
 import com.sl.safajobs.servicios.EmpresaService;
 import org.junit.jupiter.api.Test;

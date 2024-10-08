@@ -1,8 +1,6 @@
 package com.sl.safajobs.controladores;
 
-import com.sl.safajobs.dtos.EmpresaDTO;
-import com.sl.safajobs.modelos.Empresa;
-import com.sl.safajobs.repositorios.EmpresaRepository;
+import com.sl.safajobs.dto.EmpresaDTO;
 import com.sl.safajobs.servicios.EmpresaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

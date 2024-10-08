@@ -1,4 +1,4 @@
-package com.sl.safajobs.dtos;
+package com.sl.safajobs.dto;
 
 import lombok.Data;
 
