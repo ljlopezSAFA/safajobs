@@ -53,6 +53,12 @@ public class PerfilController {
 
 
 
+    @GetMapping("/buscar")
+    public List<PerfilDTO> buscar(@RequestParam String busqueda){
+        List<PerfilDTO> dtos= perfilService.buscar(busqueda);
+        return dtos;
+    }
+
 
 
 

@@ -48,6 +48,29 @@ public class PerfilService {
 
 
     /**
+     * Busca perfiles por coincidencia en nombre, apellidos o mail
+     *
+     * @param busqueda
+     * @return
+     */
+    public List<PerfilDTO> buscar(String busqueda){
+
+        List<Perfil> perfiles = perfilRepository.buscar(busqueda);
+        List<PerfilDTO> perfilDTOS = new ArrayList<>();
+
+        for(Perfil p : perfiles){
+            PerfilDTO dto = new PerfilDTO();
+            dto.setNombre(p.getNombre());
+            dto.setApellidos(p.getApellidos());
+            dto.setMail(p.getMail());
+            perfilDTOS.add(dto);
+        }
+
+        return perfilDTOS;
+    }
+
+
+    /**
      * Este método busca un perfil a partir de su id
      *
      * @param id
