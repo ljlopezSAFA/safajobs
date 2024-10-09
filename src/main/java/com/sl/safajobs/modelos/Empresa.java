@@ -37,6 +37,9 @@ public class Empresa {
     @Column(name = "es_tecnologica")
     private Boolean esTecnologica;
 
+    @Column(name = "imagen_url")
+    private String foto;
+
     @OneToMany(targetEntity = OfertaEmpleo.class,
             mappedBy = "empresa",fetch = FetchType.LAZY)
     private Set<OfertaEmpleo> ofertasEmpleo;
