@@ -11,4 +11,5 @@ public class PerfilDTO {
     private  String nombre;
     private String apellidos;
     private String mail;
+    private String foto;
 }

@@ -40,6 +40,7 @@ public class PerfilService {
             dto.setNombre(p.getNombre());
             dto.setApellidos(p.getApellidos());
             dto.setMail(p.getMail());
+            dto.setFoto(p.getFoto());
             perfilDTOS.add(dto);
         }
 
@@ -63,6 +64,7 @@ public class PerfilService {
             dto.setNombre(p.getNombre());
             dto.setApellidos(p.getApellidos());
             dto.setMail(p.getMail());
+            dto.setFoto(p.getFoto());
             perfilDTOS.add(dto);
         }
 

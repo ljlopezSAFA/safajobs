@@ -38,6 +38,9 @@ public class Perfil {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
+    @Column(name = "imagen_url")
+    private String foto;
+
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Aptitud.class)
     @JoinTable(name = "aptitud_perfil", schema = "safajobs", catalog = "postgres",
