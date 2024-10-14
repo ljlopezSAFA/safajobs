@@ -33,7 +33,7 @@ public class OfertaEmpleoService {
 
         entity.setPuesto(dto.getPuesto());
         entity.setTitular(dto.getTitular());
-        entity.setRequisitos(dto.getRequisitos());
+        entity.setRequisitos(dto.getRequisitos_minimos());
         entity.setRemuneracion(dto.getRemuneracion());
         entity.setRemuneracionMinima(dto.getRemuneracionMinima());
         entity.setRemuneracionMaxima(dto.getRemuneracionMaxima());
@@ -51,7 +51,7 @@ public class OfertaEmpleoService {
 
         entity.setPuesto(dto.getPuesto());
         entity.setTitular(dto.getTitular());
-        entity.setRequisitos(dto.getRequisitos());
+        entity.setRequisitos(dto.getRequisitos_minimos());
         entity.setRemuneracion(dto.getRemuneracion());
         entity.setRemuneracionMinima(dto.getRemuneracionMinima());
         entity.setRemuneracionMaxima(dto.getRemuneracionMaxima());

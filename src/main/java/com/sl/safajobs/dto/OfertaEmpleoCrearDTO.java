@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class OfertaEmpleoCrearDTO {
     private String titular;
     private String puesto;
-    private String requisitos;
+    private String requisitos_minimos;
     private Double remuneracionMaxima;
     private Double remuneracionMinima;
     private Double remuneracion;

@@ -2,6 +2,7 @@ package com.sl.safajobs.servicios;
 
 import com.sl.safajobs.dto.PerfilCrearDTO;
 import com.sl.safajobs.dto.PerfilDTO;
+import com.sl.safajobs.mappers.PerfilMapper;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.repositorios.PerfilRepository;
@@ -23,6 +24,8 @@ public class PerfilService {
     private PerfilRepository perfilRepository;
 
     private AptitudService aptitudService;
+
+    private PerfilMapper perfilMapper;
 
 
     /**
@@ -55,20 +58,7 @@ public class PerfilService {
      * @return
      */
     public List<PerfilDTO> buscar(String busqueda){
-
-        List<Perfil> perfiles = perfilRepository.buscar(busqueda);
-        List<PerfilDTO> perfilDTOS = new ArrayList<>();
-
-        for(Perfil p : perfiles){
-            PerfilDTO dto = new PerfilDTO();
-            dto.setNombre(p.getNombre());
-            dto.setApellidos(p.getApellidos());
-            dto.setMail(p.getMail());
-            dto.setFoto(p.getFoto());
-            perfilDTOS.add(dto);
-        }
-
-        return perfilDTOS;
+        return perfilMapper.toDTO(perfilRepository.buscar(busqueda));
     }
 
 
