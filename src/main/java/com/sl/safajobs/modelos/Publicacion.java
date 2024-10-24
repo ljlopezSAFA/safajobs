@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Table(name = "publicacion", schema = "safajobs", catalog = "postgres")
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode(exclude = {"perfil", "empresa"})
+@ToString(exclude = {"perfil", "empresa"})
 @AllArgsConstructor
 @NoArgsConstructor
 public class Publicacion {

@@ -2,7 +2,6 @@ package com.sl.safajobs;
 
 import com.sl.safajobs.modelos.Publicacion;
 import com.sl.safajobs.repositorios.PublicacionRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -49,4 +49,7 @@ public class Perfil {
     private Set<Aptitud> aptitudes = new HashSet<>(0);
 
 
+    @OneToMany(targetEntity = Publicacion.class, mappedBy = "perfil")
+    private Set<Publicacion> publicacion;
+
 }

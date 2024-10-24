@@ -84,9 +84,111 @@ create table aptitud_perfil(
 );
 
 
+alter table empresa add column imagen_url varchar(600);
+alter table perfil add column imagen_url varchar(600);
+
+ALTER TABLE oferta_empleo
+    ALTER COLUMN requisitos
+        SET DATA TYPE text;
+
+
+
+create table seguidores(
+                           id_seguidor int not null,
+                           id_seguido int not null,
+                           constraint fk_seguidores_seguidor foreign key (id_seguidor) references perfil(id),
+                           constraint fk_seguidores_seguido foreign key (id_seguido) references perfil(id)
+);
+
+
+create table mensajes(
+                         id serial primary key ,
+                         mensaje varchar(500) not null,
+                         fecha timestamp(6) not null default now(),
+                         id_emisor int4 not null,
+                         id_receptor int4 not null,
+                         constraint fk_mensaje_emisor foreign key (id_emisor) references perfil(id),
+                         constraint fk_mensaje_receptor foreign key (id_receptor) references perfil(id)
+);
+
+
+
+create table publicacion(
+                            id serial primary key,
+                            texto text not null,
+                            imagen_url varchar(500) not null,
+                            fecha timestamp(6) default now(),
+                            id_perfil int,
+                            id_empresa int,
+                            constraint fk_publicacion_perfil foreign key (id_perfil) references perfil(id),
+                            constraint fk_publicacion_empresa foreign key (id_empresa) references empresa(id)
+);
+
+
+
+select * from publicacion p ;
+select * from perfil p ;
+
+
+
+create table usuario(
+                        id serial primary key,
+                        username varchar(50) not null,
+                        password varchar (500) not null,
+                        rol int not null
+);
+
+
+create table token (
+                       id serial primary key,
+                       token text not null,
+                       fecha_creacion timestamp(6) not null,
+                       fecha_expiracion timestamp(6) not null,
+                       id_usuario int not null,
+                       constraint fk_token_usuario foreign key (id_usuario) references usuario(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+alter table perfil  add column id_usuario int null;
+alter table perfil  add constraint fk_perfil_usuario foreign key (id_usuario) references usuario(id);
+
+
+
+
+
+
+
+
+
+select * from mensajes m ;
+
+
+select count(id), id_receptor  from mensajes m  where id_emisor  = 1 or id_receptor = 1 group by id_receptor;
+
+select * from mensajes m where (id_emisor  = 1 and id_receptor = 5) or (id_emisor  = 5 and id_receptor = 1);
+
+
+
+
+select * from publicacion p ;
+
+
+
+select * from empresa;
+select * from perfil p ;
+select * from oferta_empleo oe ;
+select * from aptitud_perfil ap ;
 select * from aptitud a ;
-
-
 
 
 
