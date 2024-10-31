@@ -140,4 +140,44 @@ public class PerfilService {
 
 
 
+
+
+    public void anyadirParticipante(Integer idPerfil, Integer idAptitud){
+
+        Perfil perfil = perfilRepository.findById(idPerfil).orElse(null);
+
+        if(perfil != null){
+
+
+            Aptitud aptitud = aptitudService.getById(idAptitud);
+
+            if(aptitud!=null){
+
+                if(perfil.getAptitudes().contains(aptitud)){
+                    perfil.getAptitudes().remove(aptitud);
+                }
+
+            }
+
+        }
+
+        perfilRepository.save(perfil);
+
+
+    }
+
+
+
+
+    public List<Aptitud> getAmigos(Integer idPerfil){
+        Perfil p = perfilRepository.findById(idPerfil).orElse(null);
+
+        if(p != null){
+            return new ArrayList<>(p.getAptitudes());
+        }else{
+            return new ArrayList<>();
+        }
+    }
+
+
 }
