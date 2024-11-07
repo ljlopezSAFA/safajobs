@@ -154,7 +154,7 @@ public class PerfilService {
             if(aptitud!=null){
 
                 if(perfil.getAptitudes().contains(aptitud)){
-                    perfil.getAptitudes().remove(aptitud);
+                    perfil.getAptitudes().add(aptitud);
                 }
 
             }

@@ -1,6 +1,7 @@
 package com.sl.safajobs.controladores;
 
 import com.sl.safajobs.dto.OfertaEmpleoCrearDTO;
+import com.sl.safajobs.dto.OfertaEmpleoDTO;
 import com.sl.safajobs.modelos.OfertaEmpleo;
 import com.sl.safajobs.servicios.OfertaEmpleoService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class OfertaEmpleoController {
     private OfertaEmpleoService ofertaEmpleoService;
 
     @GetMapping("/all")
-    public List<OfertaEmpleo> getAll(){
+    public List<OfertaEmpleoDTO> getAll(){
         return ofertaEmpleoService.getAll();
     }
 

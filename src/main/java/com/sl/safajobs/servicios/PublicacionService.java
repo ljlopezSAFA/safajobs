@@ -122,10 +122,12 @@ public class PublicacionService {
 
         if (p.getPerfil() != null) {
             dtonuevo.setNombrePerfil(p.getPerfil().getNombre().concat(",").concat(p.getPerfil().getApellidos()));
+            dtonuevo.setFotoPerfil(p.getPerfil().getFoto());
         }
 
         if (p.getEmpresa() != null) {
             dtonuevo.setNombreEmpresa(p.getEmpresa().getNombre());
+            dtonuevo.setFotoEmpresa(p.getEmpresa().getFoto());
         }
         return dtonuevo;
     }

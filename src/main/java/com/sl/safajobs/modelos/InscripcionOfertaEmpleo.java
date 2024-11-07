@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 public class InscripcionOfertaEmpleo {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

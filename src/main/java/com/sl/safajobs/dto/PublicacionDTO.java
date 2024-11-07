@@ -13,5 +13,7 @@ public class PublicacionDTO {
     private String fecha;
     private String imageUrl;
     private String nombrePerfil;
+    private String fotoPerfil;
     private String nombreEmpresa;
+    private String fotoEmpresa;
 }

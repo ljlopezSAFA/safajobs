@@ -1,12 +1,15 @@
 package com.sl.safajobs.servicios;
 
 import com.sl.safajobs.dto.OfertaEmpleoCrearDTO;
+import com.sl.safajobs.dto.OfertaEmpleoDTO;
+import com.sl.safajobs.dto.OfertaEmpleoMostrarDTO;
 import com.sl.safajobs.modelos.Empresa;
 import com.sl.safajobs.modelos.OfertaEmpleo;
 import com.sl.safajobs.repositorios.OfertaEmpleoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +20,23 @@ public class OfertaEmpleoService {
     private EmpresaService empresaService;
 
 
-    public List<OfertaEmpleo> getAll(){
-        return ofertaEmpleoRepository.findAll();
+    public List<OfertaEmpleoDTO> getAll(){
+
+        List<OfertaEmpleoMostrarDTO> ofertaEmpleoDTOS = new ArrayList<>();
+        List<OfertaEmpleo> ofertaEmpleos = ofertaEmpleoRepository.findAll();
+
+        for(OfertaEmpleo o : ofertaEmpleos){
+            OfertaEmpleoMostrarDTO dto = new OfertaEmpleoMostrarDTO();
+            dto.setRemuneracion(o.getRemuneracion());
+
+
+        }
+
+
+        return new ArrayList<>();
+
+
+//        return ofertaEmpleoRepository.findAll();
     }
 
     /**
@@ -59,6 +77,10 @@ public class OfertaEmpleoService {
 
         return ofertaEmpleoRepository.save(entity);
 
+    }
+
+    public OfertaEmpleo getById(Integer id){
+        return ofertaEmpleoRepository.findById(id).orElse(null);
     }
 
 
