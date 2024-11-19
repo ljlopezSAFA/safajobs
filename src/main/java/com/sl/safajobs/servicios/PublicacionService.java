@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -34,12 +35,15 @@ public class PublicacionService {
         List<Publicacion> publicaciones = publicacionRepository.findAll();
         List<PublicacionDTO> dtos = new ArrayList<>();
 
+        publicaciones=  publicaciones.stream().sorted(Comparator.comparing(Publicacion::getFecha).reversed()).toList();
+
 
         for (Publicacion p : publicaciones) {
             PublicacionDTO dto = getPublicacionDTO(p);
             dtos.add(dto);
-
         }
+
+
 
         return dtos;
     }
@@ -123,6 +127,7 @@ public class PublicacionService {
         if (p.getPerfil() != null) {
             dtonuevo.setNombrePerfil(p.getPerfil().getNombre().concat(",").concat(p.getPerfil().getApellidos()));
             dtonuevo.setFotoPerfil(p.getPerfil().getFoto());
+            dtonuevo.setPuestoPerfil(p.getPerfil().getPuesto());
         }
 
         if (p.getEmpresa() != null) {

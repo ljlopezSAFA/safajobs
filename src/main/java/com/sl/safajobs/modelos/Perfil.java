@@ -29,6 +29,9 @@ public class Perfil {
     @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
+    @Column(name = "puesto", nullable = false)
+    private String puesto;
+
     @Column(name = "mail")
     private String mail;
 

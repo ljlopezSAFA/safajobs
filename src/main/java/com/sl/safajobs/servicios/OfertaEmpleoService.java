@@ -1,5 +1,6 @@
 package com.sl.safajobs.servicios;
 
+import com.sl.safajobs.dto.EmpresaDTO;
 import com.sl.safajobs.dto.OfertaEmpleoCrearDTO;
 import com.sl.safajobs.dto.OfertaEmpleoDTO;
 import com.sl.safajobs.dto.OfertaEmpleoMostrarDTO;
@@ -20,20 +21,36 @@ public class OfertaEmpleoService {
     private EmpresaService empresaService;
 
 
-    public List<OfertaEmpleoDTO> getAll(){
+    public List<OfertaEmpleoMostrarDTO> getAll(){
 
         List<OfertaEmpleoMostrarDTO> ofertaEmpleoDTOS = new ArrayList<>();
         List<OfertaEmpleo> ofertaEmpleos = ofertaEmpleoRepository.findAll();
 
         for(OfertaEmpleo o : ofertaEmpleos){
             OfertaEmpleoMostrarDTO dto = new OfertaEmpleoMostrarDTO();
+            dto.setId(o.getId());
+            dto.setTitular(o.getTitular());
             dto.setRemuneracion(o.getRemuneracion());
+            dto.setPuesto(o.getPuesto());
+            dto.setRequisitos(o.getRequisitos());
+            dto.setRemuneracionMinima(o.getRemuneracionMinima());
+            dto.setRemuneracionMaxima(o.getRemuneracionMaxima());
 
+            EmpresaDTO dtoe = new EmpresaDTO();
+            dtoe.setId(o.getEmpresa().getId());
+            dtoe.setCif(o.getEmpresa().getCif());
+            dtoe.setNombre(o.getEmpresa().getNombre());
+            dtoe.setFechaFundacion(o.getEmpresa().getFechaFundacion().toString());
+            dtoe.setEsTecnologica(o.getEmpresa().getEsTecnologica());
+            dtoe.setFoto(o.getEmpresa().getFoto());
+
+            dto.setEmpresa(dtoe);
+            ofertaEmpleoDTOS.add(dto);
 
         }
 
 
-        return new ArrayList<>();
+        return ofertaEmpleoDTOS;
 
 
 //        return ofertaEmpleoRepository.findAll();

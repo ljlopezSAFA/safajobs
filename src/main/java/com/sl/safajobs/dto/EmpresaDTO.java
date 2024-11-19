@@ -9,6 +9,7 @@ public class EmpresaDTO {
     private Integer id;
     private String nombre;
     private String cif;
-    private LocalDate fechaFundacion;
+    private String fechaFundacion;
     private Boolean esTecnologica;
+    private String foto;
 }

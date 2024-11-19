@@ -3,6 +3,7 @@ package com.sl.safajobs;
 import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
+import com.sl.safajobs.repositorios.MensajeRepository;
 import com.sl.safajobs.servicios.AptitudService;
 import com.sl.safajobs.servicios.PerfilService;
 import jakarta.transaction.Transactional;
@@ -21,6 +22,9 @@ public class PerfilTest {
 
     @Autowired
     private AptitudService aptitudService;
+
+    @Autowired
+    private MensajeRepository mensajeRepository;
 
 
     @Test
@@ -73,6 +77,18 @@ public class PerfilTest {
     void testEliminar(){
         Perfil perfil = perfilService.getById(2) ;
         perfilService.eliminar(perfil);
+    }
+
+
+    @Test
+    @Transactional
+    void testConversaciones(){
+
+        List<Integer> perfils = mensajeRepository.getConversacionesActivas(1);
+
+//        for(Perfil p : perfils){
+//            System.out.println(p.toString());
+//        }
     }
 
 

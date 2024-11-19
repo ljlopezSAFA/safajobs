@@ -1,7 +1,8 @@
 package com.sl.safajobs.controladores;
 
+import com.sl.safajobs.dto.InscribirseOfertaDTO;
 import com.sl.safajobs.dto.OfertaEmpleoCrearDTO;
-import com.sl.safajobs.dto.OfertaEmpleoDTO;
+import com.sl.safajobs.dto.OfertaEmpleoMostrarDTO;
 import com.sl.safajobs.modelos.OfertaEmpleo;
 import com.sl.safajobs.servicios.OfertaEmpleoService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class OfertaEmpleoController {
     private OfertaEmpleoService ofertaEmpleoService;
 
     @GetMapping("/all")
-    public List<OfertaEmpleoDTO> getAll(){
+    public List<OfertaEmpleoMostrarDTO> getAll(){
         return ofertaEmpleoService.getAll();
     }
 
@@ -35,6 +36,12 @@ public class OfertaEmpleoController {
         return ofertaEmpleoService.editar(ofertaEmpleoCrearDTO, id);
     }
 
+
+    @PostMapping("/inscribirse")
+    public String inscribirse(@RequestBody InscribirseOfertaDTO dto){
+        System.out.println(dto);
+        return "Inscripcion completada";
+    }
 
 
 

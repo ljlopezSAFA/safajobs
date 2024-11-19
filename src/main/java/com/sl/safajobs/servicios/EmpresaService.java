@@ -44,7 +44,7 @@ public class EmpresaService {
             dto.setNombre(empresa.getNombre());
             dto.setCif(empresa.getCif());
             dto.setEsTecnologica(empresa.getEsTecnologica());
-            dto.setFechaFundacion(empresa.getFechaFundacion());
+            dto.setFechaFundacion(empresa.getFechaFundacion().toString());
             empresaDTOS.add(dto);
         }
 

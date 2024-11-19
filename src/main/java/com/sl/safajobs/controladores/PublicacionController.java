@@ -16,8 +16,6 @@ public class PublicacionController {
     private PublicacionService publicacionService;
 
 
-    //HTTP -> GET / POST / PUT / DELETE
-
     @GetMapping("/all")
     public List<PublicacionDTO> obtenerPublicaciones(){
         return publicacionService.getAll();
