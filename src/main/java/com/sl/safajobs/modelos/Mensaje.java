@@ -3,7 +3,6 @@ package com.sl.safajobs.modelos;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Mensaje {
+public class
+Mensaje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

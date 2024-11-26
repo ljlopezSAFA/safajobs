@@ -79,13 +79,29 @@ public class PerfilService {
      * @param dto
      * @return
      */
-    public Perfil guardar(PerfilCrearDTO dto){
+    public Perfil guardar(PerfilCrearDTO dto) throws Exception {
 
         Perfil perfilGuardar = new Perfil();
         perfilGuardar.setNombre(dto.getNombre());
         perfilGuardar.setApellidos(dto.getApellidos());
-        perfilGuardar.setDni(dto.getDni());
-        perfilGuardar.setMail(dto.getMail());
+        perfilGuardar.setPuesto(dto.getPuesto());
+
+
+        if(dto.getMail().contains("@")){
+            perfilGuardar.setMail(dto.getMail());
+        }else{
+           throw new Exception("El mail introducido no es válido");
+        }
+
+
+        if(dto.getDni().length() == 9){
+            perfilGuardar.setDni(dto.getDni());
+        }else{
+            throw new Exception("El dni introducido no es válido");
+        }
+
+
+
 
         //FECHA NACIMIENTO (STRING) -> LOCALTADE
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

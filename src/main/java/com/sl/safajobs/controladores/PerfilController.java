@@ -40,7 +40,7 @@ public class PerfilController {
 
 
     @PostMapping()
-    public Perfil guardar(@RequestBody PerfilCrearDTO perfil){
+    public Perfil guardar(@RequestBody PerfilCrearDTO perfil) throws Exception {
         Perfil perfilGuardado = perfilService.guardar(perfil);
         return perfilGuardado;
     }

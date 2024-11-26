@@ -13,6 +13,7 @@ public class PerfilCrearDTO {
     private  String nombre;
     private String apellidos;
     private String mail;
+    private String puesto;
     private String dni;
     private String fechaNacimiento;
     private List<Integer>  aptitudes;

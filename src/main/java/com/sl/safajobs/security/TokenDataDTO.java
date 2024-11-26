@@ -9,6 +9,4 @@ public class TokenDataDTO {
     private String username;
     private String rol;
     private Long fecha_creacion;
-    private Long fecha_expiracion;
-
-}
+    private Long fecha_expiracion;}
