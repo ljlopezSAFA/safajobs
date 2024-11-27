@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "perfil", schema = "safajobs", catalog = "postgres")
+@Table(name = "perfil", schema = "safajobs")
 @Getter
 @Setter
 @ToString(exclude = {"aptitudes"})
@@ -46,7 +46,7 @@ public class Perfil {
 
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Aptitud.class)
-    @JoinTable(name = "aptitud_perfil", schema = "safajobs", catalog = "postgres",
+    @JoinTable(name = "aptitud_perfil", schema = "safajobs",
             joinColumns = {@JoinColumn(name = "id_perfil", nullable = false)} ,
             inverseJoinColumns ={@JoinColumn(name = "id_aptitud", nullable = false)})
     private Set<Aptitud> aptitudes = new HashSet<>(0);

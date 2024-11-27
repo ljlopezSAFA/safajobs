@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "aptitud", catalog = "postgres", schema = "safajobs")
+@Table(name = "aptitud", schema = "safajobs")
 @Getter
 @Setter
 @EqualsAndHashCode

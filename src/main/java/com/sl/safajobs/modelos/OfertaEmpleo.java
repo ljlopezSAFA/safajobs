@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "oferta_empleo", schema = "safajobs", catalog = "postgres")
+@Table(name = "oferta_empleo", schema = "safajobs")
 @Getter
 @Setter
 @ToString
@@ -44,7 +44,7 @@ public class OfertaEmpleo {
     private Empresa  empresa;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Perfil.class)
-    @JoinTable(name = "inscripcion_oferta_empleo", schema = "safajobs", catalog = "postgres",
+    @JoinTable(name = "inscripcion_oferta_empleo", schema = "safajobs",
             joinColumns = {@JoinColumn(name = "id_oferta_empleo", nullable = false)} ,
             inverseJoinColumns ={@JoinColumn(name = "id_perfil", nullable = false)})
     private Set<Perfil> inscritos;

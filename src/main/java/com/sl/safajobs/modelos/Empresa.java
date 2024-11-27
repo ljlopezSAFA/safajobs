@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "empresa", schema = "safajobs", catalog = "postgres")
+@Table(name = "empresa", schema = "safajobs")
 @Getter
 @Setter
 @ToString(exclude = {"ofertasEmpleo"})

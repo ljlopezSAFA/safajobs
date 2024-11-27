@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "publicacion", schema = "safajobs", catalog = "postgres")
+@Table(name = "publicacion", schema = "safajobs")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"perfil", "empresa"})

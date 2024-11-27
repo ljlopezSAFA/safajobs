@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "mensajes", catalog = "postgres", schema = "safajobs")
+@Table(name = "mensajes", schema = "safajobs")
 @Getter
 @Setter
 @EqualsAndHashCode
