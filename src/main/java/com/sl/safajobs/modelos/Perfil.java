@@ -2,6 +2,7 @@ package com.sl.safajobs.modelos;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class Perfil {
     private Integer id;
 
     @Column(name = "nombre", nullable = false)
+    @NotBlank(message = "No se puede crear un perfil sin nombre")
     private String nombre;
 
     @Column(name = "apellidos", nullable = false)

@@ -6,8 +6,10 @@ import com.sl.safajobs.mappers.PerfilMapper;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.repositorios.PerfilRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Validated
 public class PerfilService {
 
 
@@ -79,7 +82,7 @@ public class PerfilService {
      * @param dto
      * @return
      */
-    public Perfil guardar(PerfilCrearDTO dto) throws Exception {
+    public Perfil guardar(@Valid PerfilCrearDTO dto) throws Exception {
 
         Perfil perfilGuardar = new Perfil();
         perfilGuardar.setNombre(dto.getNombre());

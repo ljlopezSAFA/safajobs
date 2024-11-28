@@ -5,7 +5,9 @@ import com.sl.safajobs.dto.PerfilCrearDTO;
 import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.servicios.PerfilService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +42,7 @@ public class PerfilController {
 
 
     @PostMapping()
-    public Perfil guardar(@RequestBody PerfilCrearDTO perfil) throws Exception {
+    public Perfil guardar(@RequestBody  PerfilCrearDTO perfil) throws Exception {
         Perfil perfilGuardado = perfilService.guardar(perfil);
         return perfilGuardado;
     }

@@ -6,6 +6,8 @@ import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.repositorios.PerfilRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -77,9 +79,9 @@ public class PerfilServiceTest {
 
 
     @Test
-    @DisplayName("Test de crear perfil Negativo")
+    @DisplayName("Test 1 -> Crear perfil con datos incorrectos")
     @Tag("Perfil")
-    public void testCrearPerfilMailNegativo() throws Exception {
+    public void testCrearPerfilMailNegativo() {
 
         //GIVEN
         PerfilCrearDTO dto = new PerfilCrearDTO();
@@ -98,13 +100,13 @@ public class PerfilServiceTest {
 
 
     @Test
-    @DisplayName("Test de crear perfil datos correctos")
+    @DisplayName("Test 2 -> Crear perfil con datos correctos")
     @Tag("Perfil")
     public void testCrearPerfilPositivo() throws Exception {
 
         //GIVEN
         PerfilCrearDTO dto = new PerfilCrearDTO();
-        dto.setNombre("Pepito");
+        dto.setNombre("Juan");
         dto.setApellidos("Martínez");
         dto.setFechaNacimiento("1980-05-05");
         dto.setMail("mailinvalido@es");
@@ -135,17 +137,15 @@ public class PerfilServiceTest {
         //WHEN
         List<PerfilDTO> perfilesEncontrados = service.buscar("Clara");
 
-
         //THEN
         assertTrue(perfilesEncontrados.isEmpty());
-
 
 
     }
 
 
     @Test
-    @DisplayName("Test 3 -> Probar a buscar perfil inexistente")
+    @DisplayName("Test 4 -> Probar a buscar perfil por Nombre")
     public void testBucarPerfilNombre(){
 
         //GIVEN
@@ -159,6 +159,31 @@ public class PerfilServiceTest {
         assertEquals(1, perfilesEncontrados.size());
         assertEquals("Antonio", perfilesEncontrados.get(0).getNombre());
     }
+
+
+
+    @Test
+    @DisplayName("Test 5 -> Crear perfil con nombre en blanco")
+    public void testCrearPerfilSinNombreNegativo() {
+
+        //GIVEN
+        PerfilCrearDTO dto = new PerfilCrearDTO();
+        dto.setNombre("Luis");
+        dto.setApellidos("");
+        dto.setFechaNacimiento("1980-05-05");
+        dto.setMail("mailinvalido@hola.es");
+        dto.setDni("12345678A");
+        dto.setAptitudes(new ArrayList<>());
+
+        //WHEN
+        //THEN
+        assertThrows(ConstraintViolationException.class, () -> service.guardar(dto));
+
+    }
+
+
+
+
 
 
 

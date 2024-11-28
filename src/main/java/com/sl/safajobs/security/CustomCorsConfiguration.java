@@ -13,8 +13,8 @@ public class CustomCorsConfiguration  {
         @Bean
         public CorsFilter corsFilter() {
             CorsConfiguration corsConfiguration = new CorsConfiguration();
-            corsConfiguration.addAllowedOrigin("http://localhost:8101");
-            corsConfiguration.addAllowedOrigin("http://10.65.11.166:8101");
+            corsConfiguration.addAllowedOrigin("http://localhost:3000");
+            corsConfiguration.addAllowedOrigin("http://localhost:4200");
             corsConfiguration.addAllowedMethod("*"); // Permitir todos los métodos (GET, POST, etc.)
             corsConfiguration.addAllowedHeader("*"); // Permitir todos los encabezados
             corsConfiguration.setAllowCredentials(true); // Si usas cookies o sesiones
