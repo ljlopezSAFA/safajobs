@@ -6,7 +6,6 @@ import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.repositorios.PerfilRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -66,7 +65,6 @@ public class PerfilServiceTest {
         dto2.setDni("12345678A");
         dto2.setPuesto("Empleado");
         dto2.setAptitudes(new ArrayList<>());
-
         service.guardar(dto1);
         service.guardar(dto2);
 
@@ -92,8 +90,7 @@ public class PerfilServiceTest {
         dto.setDni("12345678A");
         dto.setAptitudes(new ArrayList<>());
 
-        //WHEN
-        //THEN
+        //WHEN && THEN
         Exception exception = assertThrows(Exception.class, () -> service.guardar(dto));
         assertEquals("El mail introducido no es válido",exception.getMessage());
     }
@@ -117,11 +114,9 @@ public class PerfilServiceTest {
         //WHEN
         Perfil p =  service.guardar(dto);
 
-
         //THEN
         assertNotNull(p);
         assertEquals(dto.getNombre(), p.getNombre());
-
 
     }
 

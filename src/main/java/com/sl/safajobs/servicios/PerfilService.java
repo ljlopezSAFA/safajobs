@@ -89,13 +89,11 @@ public class PerfilService {
         perfilGuardar.setApellidos(dto.getApellidos());
         perfilGuardar.setPuesto(dto.getPuesto());
 
-
         if(dto.getMail().contains("@")){
             perfilGuardar.setMail(dto.getMail());
         }else{
            throw new Exception("El mail introducido no es válido");
         }
-
 
         if(dto.getDni().length() == 9){
             perfilGuardar.setDni(dto.getDni());
@@ -103,14 +101,10 @@ public class PerfilService {
             throw new Exception("El dni introducido no es válido");
         }
 
-
-
-
         //FECHA NACIMIENTO (STRING) -> LOCALTADE
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaNacimiento = LocalDate.parse(dto.getFechaNacimiento(), formatter);
         perfilGuardar.setFechaNacimiento(fechaNacimiento);
-
 
         //APTITUDES
         Set<Aptitud> aptituds = new HashSet<>();
@@ -119,7 +113,6 @@ public class PerfilService {
             aptituds.add(aptitud);
         }
         perfilGuardar.setAptitudes(aptituds);
-
         return perfilRepository.save(perfilGuardar);
     }
 
