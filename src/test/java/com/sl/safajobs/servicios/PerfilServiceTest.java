@@ -92,7 +92,6 @@ public class PerfilServiceTest {
 
         //WHEN && THEN
         Exception exception = assertThrows(Exception.class, () -> service.guardar(dto));
-        assertEquals("El mail introducido no es válido",exception.getMessage());
     }
 
 

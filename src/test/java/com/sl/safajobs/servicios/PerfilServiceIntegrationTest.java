@@ -76,7 +76,7 @@ public class PerfilServiceIntegrationTest {
         perfilGuardado.setNombre("Juan");
         perfilGuardado.setMail("juan@example.com");
         perfilGuardado.setAptitudes(Set.of(aptitud1, aptitud2));
-//        when(perfilRepository.save(any(Perfil.class))).thenReturn(perfilGuardado);
+        when(perfilRepository.save(any(Perfil.class))).thenReturn(perfilGuardado);
 
         // WHEN: Guardamos el perfil
         Perfil resultado = perfilService.guardar(dto);
