@@ -20,7 +20,7 @@ public class AptitudController {
     }
 
     @GetMapping
-    public Aptitud getById(@RequestParam Integer id){
+    public Aptitud getById(@RequestParam Integer id) throws Exception {
         return aptitudService.getById(id);
     }
 

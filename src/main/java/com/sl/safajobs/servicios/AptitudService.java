@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class AptitudService {
@@ -20,8 +21,16 @@ public class AptitudService {
      * @param id
      * @return
      */
-    public Aptitud getById(Integer id) {
-        return aptitudRepository.findById(id).orElse(null);
+    public Aptitud getById(Integer id) throws Exception {
+
+        Aptitud aptitud  = aptitudRepository.findById(id).orElse(null);
+
+        if (aptitud==null){
+            throw new Exception("No existe ninguna aptitud con el id indicado");
+        }else{
+            return aptitud;
+        }
+
     }
 
 
@@ -41,7 +50,23 @@ public class AptitudService {
      * @return
      */
     public Aptitud guardar(Aptitud aptitud) {
-        return aptitudRepository.save(aptitud);
+
+        Aptitud aptitudGuardada;
+
+        try{
+            if(aptitud.getTitulo().isBlank()){
+                throw new Exception("El título debe estar relleno");
+            }
+
+            aptitudGuardada = aptitudRepository.save(aptitud);
+            return aptitudGuardada;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+
+
     }
 
 

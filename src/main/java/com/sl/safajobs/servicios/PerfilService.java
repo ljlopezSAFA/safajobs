@@ -154,7 +154,7 @@ public class PerfilService {
 
 
 
-    public void anyadirParticipante(Integer idPerfil, Integer idAptitud){
+    public void anyadirParticipante(Integer idPerfil, Integer idAptitud) throws Exception {
 
         Perfil perfil = perfilRepository.findById(idPerfil).orElse(null);
 
