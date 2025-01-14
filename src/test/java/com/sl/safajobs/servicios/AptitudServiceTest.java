@@ -40,12 +40,7 @@ public class AptitudServiceTest {
 
         repository.save(a1);
         repository.save(a2);
-
-
-
     }
-
-
 
 
 
