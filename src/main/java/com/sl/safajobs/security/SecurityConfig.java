@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -21,21 +22,28 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                    .csrf(AbstractHttpConfigurer::disable)
-                    .cors(AbstractHttpConfigurer::disable)
-                    .authorizeHttpRequests(req -> req
-                        .requestMatchers("/auth/**").permitAll()
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/auth/**")
+                        .permitAll()
+                        .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()).authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling((exception) -> exception.accessDeniedHandler(accessDeniedHandler()))
+        ;
+
 
         return http.build();
 
     }
-
-
-
 
 
 }
