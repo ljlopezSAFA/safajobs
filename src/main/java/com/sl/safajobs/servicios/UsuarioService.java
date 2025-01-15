@@ -7,7 +7,6 @@ import com.sl.safajobs.enumerados.Rol;
 import com.sl.safajobs.modelos.Usuario;
 import com.sl.safajobs.repositorios.UsuarioRepository;
 import com.sl.safajobs.security.JWTService;
-import com.sl.safajobs.security.TokenDataDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
