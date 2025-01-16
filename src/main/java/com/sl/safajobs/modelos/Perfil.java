@@ -31,7 +31,7 @@ public class Perfil {
     @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
-    @Column(name = "puesto", nullable = false)
+    @Column(name = "puesto")
     private String puesto;
 
     @Column(name = "mail")
@@ -56,5 +56,9 @@ public class Perfil {
 
     @OneToMany(targetEntity = Publicacion.class, mappedBy = "perfil")
     private Set<Publicacion> publicacion;
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
 }

@@ -180,6 +180,12 @@ public class PerfilService {
 
 
 
+    public Perfil guardarPerfil(Perfil perfil){
+        return perfilRepository.save(perfil);
+    }
+
+
+
 
     public List<Aptitud> getAmigos(Integer idPerfil){
         Perfil p = perfilRepository.findById(idPerfil).orElse(null);

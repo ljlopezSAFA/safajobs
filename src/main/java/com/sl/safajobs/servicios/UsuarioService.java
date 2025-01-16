@@ -4,6 +4,7 @@ import com.sl.safajobs.dto.LoginDTO;
 import com.sl.safajobs.dto.RegistroDTO;
 import com.sl.safajobs.dto.RespuestaDTO;
 import com.sl.safajobs.enumerados.Rol;
+import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.modelos.Usuario;
 import com.sl.safajobs.repositorios.UsuarioRepository;
 import com.sl.safajobs.security.JWTService;
@@ -17,6 +18,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -25,6 +29,7 @@ public class UsuarioService implements UserDetailsService {
 
 
     private UsuarioRepository usuarioRepository;
+    private PerfilService perfilService;
     private final PasswordEncoder passwordEncoder;
     private JWTService jwtService;
 
@@ -41,7 +46,30 @@ public class UsuarioService implements UserDetailsService {
         nuevoUsuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         nuevoUsuario.setRol(Rol.PERFIL);
 
-        return usuarioRepository.save(nuevoUsuario);
+
+        Perfil perfil = new Perfil();
+        perfil.setNombre(dto.getNombre());
+        perfil.setApellidos(dto.getApellidos());
+        perfil.setDni(dto.getDni());
+        perfil.setMail(dto.getMail());
+        perfil.setPuesto("Sin Puesto");
+        perfil.setAptitudes(new HashSet<>());
+        perfil.setPublicacion(new HashSet<>());
+
+
+        //FECHA NACIMIENTO (STRING) -> LOCALTADE
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaNacimiento = LocalDate.parse(dto.getFechaNacimiento(), formatter);
+        perfil.setFechaNacimiento(fechaNacimiento);
+
+        Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
+
+
+        perfil.setUsuario(usuarioGuardado);
+        Perfil perfilGuardado = perfilService.guardarPerfil(perfil);
+
+
+        return usuarioGuardado;
     }
 
 
@@ -71,6 +99,7 @@ public class UsuarioService implements UserDetailsService {
         }
 
     }
+
 
 
 
