@@ -4,6 +4,7 @@ import com.sl.safajobs.dto.LoginDTO;
 import com.sl.safajobs.dto.RegistroDTO;
 import com.sl.safajobs.dto.RespuestaDTO;
 import com.sl.safajobs.modelos.Usuario;
+import com.sl.safajobs.security.AuthService;
 import com.sl.safajobs.security.TokenDataDTO;
 import com.sl.safajobs.servicios.UsuarioService;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private UsuarioService service;
+    private AuthService authService;
 
 
     @PostMapping("/registro/perfil")
@@ -28,7 +30,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<RespuestaDTO> registro(@RequestBody LoginDTO dto){
-        return service.login(dto);
+        return authService.login(dto);
     }
 
 

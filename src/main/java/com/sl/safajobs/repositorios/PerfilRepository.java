@@ -1,6 +1,7 @@
 package com.sl.safajobs.repositorios;
 
 import com.sl.safajobs.modelos.Perfil;
+import com.sl.safajobs.modelos.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +22,8 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
 
     @Query(value = "select count(*) from safajobs.empresa e  where es_tecnologica = false", nativeQuery = true )
     Integer getNumeroEmpresasNoTecnologicas();
+
+    Perfil findTopByUsuario(Usuario usuario);
 
 
 }

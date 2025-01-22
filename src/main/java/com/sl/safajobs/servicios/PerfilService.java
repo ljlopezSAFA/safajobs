@@ -5,6 +5,7 @@ import com.sl.safajobs.dto.PerfilDTO;
 import com.sl.safajobs.mappers.PerfilMapper;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
+import com.sl.safajobs.modelos.Usuario;
 import com.sl.safajobs.repositorios.PerfilRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -195,6 +196,11 @@ public class PerfilService {
         }else{
             return new ArrayList<>();
         }
+    }
+
+
+    public Perfil buscarPorUsuario(Usuario usuario){
+        return perfilRepository.findTopByUsuario(usuario);
     }
 
 

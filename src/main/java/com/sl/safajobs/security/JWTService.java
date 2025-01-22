@@ -1,12 +1,17 @@
 package com.sl.safajobs.security;
 
 
+import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.modelos.Usuario;
+import com.sl.safajobs.servicios.PerfilService;
+import com.sl.safajobs.servicios.UsuarioService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +21,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
+
 public class JWTService {
 
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private PerfilService perfilService;
 
     /**
      * Método para generar token de acceso a través de los datos
@@ -64,6 +76,27 @@ public class JWTService {
                 .rol((String) mapa.get("rol"))
                 .build();
     }
+
+
+    public Perfil extraerPerfilToken(String token){
+        String tokenSinCabecera = token.substring(7);
+        TokenDataDTO tokenDataDTO = extractTokenData(tokenSinCabecera);
+        Usuario usuarioLogueado = (Usuario) usuarioService.loadUserByUsername(tokenDataDTO.getUsername());
+        Perfil perfilUsuarioLogueado = perfilService.buscarPorUsuario(usuarioLogueado);
+        return perfilUsuarioLogueado;
+
+    }
+
+    public Usuario extraerUsuarioToken(String token){
+        String tokenSinCabecera = token.substring(7);
+        TokenDataDTO tokenDataDTO = extractTokenData(tokenSinCabecera);
+        Usuario usuarioLogueado = (Usuario) usuarioService.loadUserByUsername(tokenDataDTO.getUsername());
+        return usuarioLogueado;
+    }
+
+
+
+
 
     /**
      * Método que me dice si el token a expirado

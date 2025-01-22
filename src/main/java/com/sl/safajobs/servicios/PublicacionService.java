@@ -20,7 +20,6 @@ import java.util.List;
 public class PublicacionService {
 
     private PublicacionRepository publicacionRepository;
-
     private PerfilService perfilService;
     private EmpresaService empresaService;
 
@@ -35,14 +34,13 @@ public class PublicacionService {
         List<Publicacion> publicaciones = publicacionRepository.findAll();
         List<PublicacionDTO> dtos = new ArrayList<>();
 
-        publicaciones=  publicaciones.stream().sorted(Comparator.comparing(Publicacion::getFecha).reversed()).toList();
+        publicaciones = publicaciones.stream().sorted(Comparator.comparing(Publicacion::getFecha).reversed()).toList();
 
 
         for (Publicacion p : publicaciones) {
             PublicacionDTO dto = getPublicacionDTO(p);
             dtos.add(dto);
         }
-
 
 
         return dtos;
@@ -135,6 +133,21 @@ public class PublicacionService {
             dtonuevo.setFotoEmpresa(p.getEmpresa().getFoto());
         }
         return dtonuevo;
+    }
+
+    public List<PublicacionDTO> getByPerfil(Perfil perfil) {
+        List<Publicacion> publicaciones = publicacionRepository.findByPerfil(perfil);
+        List<PublicacionDTO> dtos = new ArrayList<>();
+
+        publicaciones = publicaciones.stream().sorted(Comparator.comparing(Publicacion::getFecha).reversed()).toList();
+
+
+        for (Publicacion p : publicaciones) {
+            PublicacionDTO dto = getPublicacionDTO(p);
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 
 }
