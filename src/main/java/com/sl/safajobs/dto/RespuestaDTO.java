@@ -11,6 +11,7 @@ import lombok.Data;
 public class RespuestaDTO {
     private Integer estado;
     private String token;
+    private String avatar;
     private String mensaje;
     private Object cuerpo;
 }

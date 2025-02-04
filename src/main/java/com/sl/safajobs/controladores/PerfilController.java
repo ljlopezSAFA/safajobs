@@ -35,9 +35,9 @@ public class PerfilController {
     }
 
     @GetMapping("/id/{id}")
-    public Perfil getByIdPath(@PathVariable Integer id){
-        Perfil perfil = perfilService.getById(id);
-        return perfil;
+    public PerfilDTO getByIdPath(@PathVariable Integer id){
+        PerfilDTO dto = perfilService.getByIdDTO(id);
+        return dto;
     }
 
 

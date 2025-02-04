@@ -76,6 +76,18 @@ public class PerfilService {
         return perfilRepository.findById(id).orElse(null);
     }
 
+    public PerfilDTO getByIdDTO(Integer id){
+        Perfil p = perfilRepository.findById(id).orElse(null);
+        PerfilDTO dto = new PerfilDTO();
+        if(p!=null){
+            dto.setNombre(p.getNombre());
+            dto.setApellidos(p.getApellidos());
+            dto.setMail(p.getMail());
+            dto.setFoto(p.getFoto());
+        }
+        return dto;
+    }
+
 
     /**
      * Este método guarda un perfil nuevo o modifica uno existente
