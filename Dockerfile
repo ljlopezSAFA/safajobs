@@ -2,29 +2,30 @@
 # Usa una imagen oficial de OpenJDK con Maven
 FROM amazoncorretto:21-alpine-jdk
 
-
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el archivo pom.xml y las dependencias antes de copiar el código fuente
-COPY pom.xml mvnw .mvn/ ./
-RUN chmod +x mvnw
-RUN ./mvnw dependency:go-offline
+# Copia Maven Wrapper correctamente
+COPY .mvn/ .mvn/
+COPY mvnw mvnw.cmd pom.xml ./
 
-# Copia todo el código fuente al contenedor
-COPY . .
-
-# Da permisos de ejecución a Maven Wrapper
+# Da permisos de ejecución al wrapper de Maven
 RUN chmod +x mvnw
 
-# Compila el proyecto con Maven y salta los tests para acelerar el build
+# Descarga las dependencias para mejorar la cacheabilidad
+RUN ./mvnw dependency:resolve dependency:go-offline
+
+# Copia el código fuente
+COPY src/ src/
+
+# Compila la aplicación
 RUN ./mvnw clean package -DskipTests
 
-# Verifica que el archivo JAR se haya generado correctamente
+# Verifica que el JAR se haya generado
 RUN ls -l target/
 
-# Expone el puerto en el que corre la aplicación (ajústalo si es diferente)
+# Expone el puerto 8080
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación con el nombre correcto del JAR
+# Ejecuta la aplicación
 CMD ["java", "-jar", "target/safajobs-0.0.1-SNAPSHOT.jar"]
