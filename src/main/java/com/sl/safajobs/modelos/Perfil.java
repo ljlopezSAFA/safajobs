@@ -40,6 +40,9 @@ public class Perfil {
     @Column(name = "dni")
     private String dni;
 
+    @Column(name = "sobre_mi")
+    private String sobreMi;
+
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 

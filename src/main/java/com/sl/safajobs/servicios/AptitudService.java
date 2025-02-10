@@ -5,6 +5,7 @@ import com.sl.safajobs.repositorios.AptitudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,7 +33,6 @@ public class AptitudService {
         }
 
     }
-
 
     /**
      * Devuelve todas las aptitudes de base de datos

@@ -1,7 +1,6 @@
 package com.sl.safajobs.servicios;
 
-import com.sl.safajobs.dto.PerfilCrearDTO;
-import com.sl.safajobs.dto.PerfilDTO;
+import com.sl.safajobs.dto.*;
 import com.sl.safajobs.mappers.PerfilMapper;
 import com.sl.safajobs.modelos.Aptitud;
 import com.sl.safajobs.modelos.Perfil;
@@ -9,6 +8,7 @@ import com.sl.safajobs.modelos.Usuario;
 import com.sl.safajobs.repositorios.PerfilRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,6 +29,10 @@ public class PerfilService {
 
     private AptitudService aptitudService;
 
+    private ExperienciaEducativaService experienciaEducativaService;
+
+    private ExperienciaLaboralService experienciaLaboralService;
+
     private PerfilMapper perfilMapper;
 
 
@@ -37,12 +41,12 @@ public class PerfilService {
      *
      * @return
      */
-    public List<PerfilDTO> getAll(){
+    public List<PerfilDTO> getAll() {
 
         List<Perfil> perfiles = perfilRepository.findAll();
         List<PerfilDTO> perfilDTOS = new ArrayList<>();
 
-        for(Perfil p : perfiles){
+        for (Perfil p : perfiles) {
             PerfilDTO dto = new PerfilDTO();
             dto.setNombre(p.getNombre());
             dto.setApellidos(p.getApellidos());
@@ -61,7 +65,7 @@ public class PerfilService {
      * @param busqueda
      * @return
      */
-    public List<PerfilDTO> buscar(String busqueda){
+    public List<PerfilDTO> buscar(String busqueda) {
         return perfilMapper.toDTO(perfilRepository.buscar(busqueda));
     }
 
@@ -72,14 +76,14 @@ public class PerfilService {
      * @param id
      * @return
      */
-    public Perfil getById(Integer id){
+    public Perfil getById(Integer id) {
         return perfilRepository.findById(id).orElse(null);
     }
 
-    public PerfilDTO getByIdDTO(Integer id){
+    public PerfilDTO getByIdDTO(Integer id) {
         Perfil p = perfilRepository.findById(id).orElse(null);
         PerfilDTO dto = new PerfilDTO();
-        if(p!=null){
+        if (p != null) {
             dto.setNombre(p.getNombre());
             dto.setApellidos(p.getApellidos());
             dto.setMail(p.getMail());
@@ -102,15 +106,15 @@ public class PerfilService {
         perfilGuardar.setApellidos(dto.getApellidos());
         perfilGuardar.setPuesto(dto.getPuesto());
 
-        if(dto.getMail().contains("@")){
+        if (dto.getMail().contains("@")) {
             perfilGuardar.setMail(dto.getMail());
-        }else{
-           throw new Exception("El mail introducido no es válido");
+        } else {
+            throw new Exception("El mail introducido no es válido");
         }
 
-        if(dto.getDni().length() == 9){
+        if (dto.getDni().length() == 9) {
             perfilGuardar.setDni(dto.getDni());
-        }else{
+        } else {
             throw new Exception("El dni introducido no es válido");
         }
 
@@ -121,7 +125,7 @@ public class PerfilService {
 
         //APTITUDES
         Set<Aptitud> aptituds = new HashSet<>();
-        for(Integer idAptitud : dto.getAptitudes()){
+        for (Integer idAptitud : dto.getAptitudes()) {
             Aptitud aptitud = aptitudService.getById(idAptitud);
             aptituds.add(aptitud);
         }
@@ -135,50 +139,47 @@ public class PerfilService {
      *
      * @param id
      */
-    public String eliminar(Integer id){
+    public String eliminar(Integer id) {
         String mensaje;
         Perfil perfil = getById(id);
 
-        if(perfil == null){
-            return  "El perfil con el id indicado no exite";
+        if (perfil == null) {
+            return "El perfil con el id indicado no exite";
         }
 
         try {
             perfilRepository.deleteById(id);
             perfil = getById(id);
-            if(perfil != null){
-                mensaje =  "No se ha podido eliminar el perfil";
-            }else{
+            if (perfil != null) {
+                mensaje = "No se ha podido eliminar el perfil";
+            } else {
                 mensaje = "Perfil eliminado correctamente";
             }
         } catch (Exception e) {
-            mensaje =  "No se ha podido eliminar el perfil";
+            mensaje = "No se ha podido eliminar el perfil";
         }
 
-       return mensaje;
+        return mensaje;
     }
 
 
-    public void eliminar(Perfil perfil){
+    public void eliminar(Perfil perfil) {
         perfilRepository.delete(perfil);
     }
-
-
-
 
 
     public void anyadirParticipante(Integer idPerfil, Integer idAptitud) throws Exception {
 
         Perfil perfil = perfilRepository.findById(idPerfil).orElse(null);
 
-        if(perfil != null){
+        if (perfil != null) {
 
 
             Aptitud aptitud = aptitudService.getById(idAptitud);
 
-            if(aptitud!=null){
+            if (aptitud != null) {
 
-                if(perfil.getAptitudes().contains(aptitud)){
+                if (perfil.getAptitudes().contains(aptitud)) {
                     perfil.getAptitudes().add(aptitud);
                 }
 
@@ -192,27 +193,54 @@ public class PerfilService {
     }
 
 
-
-    public Perfil guardarPerfil(Perfil perfil){
+    public Perfil guardarPerfil(Perfil perfil) {
         return perfilRepository.save(perfil);
     }
 
 
-
-
-    public List<Aptitud> getAmigos(Integer idPerfil){
+    public List<Aptitud> getAmigos(Integer idPerfil) {
         Perfil p = perfilRepository.findById(idPerfil).orElse(null);
 
-        if(p != null){
+        if (p != null) {
             return new ArrayList<>(p.getAptitudes());
-        }else{
+        } else {
             return new ArrayList<>();
         }
     }
 
 
-    public Perfil buscarPorUsuario(Usuario usuario){
+    public Perfil buscarPorUsuario(Usuario usuario) {
         return perfilRepository.findTopByUsuario(usuario);
+    }
+
+
+    public PerfilDatosDTO obtenerDatosPerfil(Perfil perfil) {
+        PerfilDatosDTO dto = new PerfilDatosDTO();
+
+        dto.setNombre(perfil.getNombre());
+        dto.setApellidos(perfil.getApellidos());
+        dto.setMail(perfil.getMail());
+        dto.setFechaNacimiento(perfil.getFechaNacimiento().toString());
+        dto.setFoto(perfil.getFoto());
+
+        dto.setAptitudes(perfil.getAptitudes()
+                .stream()
+                .map(a -> new AptitudDTO(a.getTipoAptitud().toString(), a.getTitulo(), a.getDetalle()))
+                .toList());
+
+
+        dto.setEducacion(experienciaEducativaService.getAllByPerfilId(perfil.getId())
+                .stream()
+                .map(e-> new ExperienciaEducativaDTO(e.getCentroEducativo(), e.getCurso(), e.getFechaInicio().toString(), e.getFechaFin() !=null ? e.getFechaFin().toString(): ""))
+                .toList());
+
+
+        dto.setExperienciaLaboral(experienciaLaboralService.getByIdPerfil(perfil.getId())
+                .stream()
+                .map(e-> new ExperienciaLaboralDTO(e.getPuesto(), e.getFechaInicio().toString(), e.getFechaFin() !=null ? e.getFechaFin().toString(): "",e.getEmpresa().getNombre(), e.getEmpresa().getFoto()))
+                .toList());
+        return dto;
+
     }
 
 

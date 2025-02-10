@@ -3,11 +3,11 @@ package com.sl.safajobs.controladores;
 
 import com.sl.safajobs.dto.PerfilCrearDTO;
 import com.sl.safajobs.dto.PerfilDTO;
+import com.sl.safajobs.dto.PerfilDatosDTO;
 import com.sl.safajobs.modelos.Perfil;
+import com.sl.safajobs.security.JWTService;
 import com.sl.safajobs.servicios.PerfilService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +19,7 @@ public class PerfilController {
 
 
     private PerfilService perfilService;
+    private JWTService jwtService;
 
 
     @GetMapping("/all")
@@ -59,6 +60,13 @@ public class PerfilController {
     public List<PerfilDTO> buscar(@RequestParam String busqueda){
         List<PerfilDTO> dtos= perfilService.buscar(busqueda);
         return dtos;
+    }
+
+
+    @GetMapping("/datos")
+    public PerfilDatosDTO getDatosPerfil(@RequestHeader("Authorization") String token){
+        Perfil perfil = jwtService.extraerPerfilToken(token);
+        return perfilService.obtenerDatosPerfil(perfil);
     }
 
 

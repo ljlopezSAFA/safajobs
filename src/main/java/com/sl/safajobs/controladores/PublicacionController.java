@@ -45,7 +45,9 @@ public class PublicacionController {
 
 
     @PostMapping()
-    public PublicacionDTO guardar(@RequestBody PublicacionCrearDTO dto){
+    public PublicacionDTO guardar(@RequestHeader("Authorization") String token,@RequestBody PublicacionCrearDTO dto){
+        Perfil perfilLogueado = jwtService.extraerPerfilToken(token);
+        dto.setId_perfil(perfilLogueado.getId());
         return publicacionService.guardarPublicacion(dto);
     }
 
