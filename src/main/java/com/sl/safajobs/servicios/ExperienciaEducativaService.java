@@ -17,4 +17,10 @@ public class ExperienciaEducativaService {
     public List<ExperienciaEducativa> getAllByPerfilId(Integer id){
         return repository.findAllByPerfilId(id);
     }
+
+    public ExperienciaEducativa findById(Integer id){
+        return repository.findById(id).orElse(null);
+
+    }
+
 }

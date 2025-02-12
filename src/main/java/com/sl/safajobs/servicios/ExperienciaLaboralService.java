@@ -1,5 +1,6 @@
 package com.sl.safajobs.servicios;
 
+import com.sl.safajobs.modelos.ExperienciaEducativa;
 import com.sl.safajobs.modelos.ExperienciaLaboral;
 import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.repositorios.ExperienciaLaboralRepository;
@@ -21,5 +22,7 @@ public class ExperienciaLaboralService {
     }
 
 
-
+    public ExperienciaLaboral findById(Integer id) {
+        return repository.findById(id).orElse(null);
+    }
 }

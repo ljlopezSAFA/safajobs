@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AptitudDTO {
 
+    private Integer id;
     private String tipoAptitud;
     private String titulo;
     private String detalle;

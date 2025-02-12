@@ -22,15 +22,11 @@ public class AptitudService {
      * @param id
      * @return
      */
-    public Aptitud getById(Integer id) throws Exception {
+    public Aptitud getById(Integer id)  {
 
         Aptitud aptitud  = aptitudRepository.findById(id).orElse(null);
 
-        if (aptitud==null){
-            throw new Exception("No existe ninguna aptitud con el id indicado");
-        }else{
-            return aptitud;
-        }
+        return aptitud;
 
     }
 

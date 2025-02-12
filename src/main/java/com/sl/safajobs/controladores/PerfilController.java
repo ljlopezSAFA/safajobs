@@ -8,6 +8,7 @@ import com.sl.safajobs.modelos.Perfil;
 import com.sl.safajobs.security.JWTService;
 import com.sl.safajobs.servicios.PerfilService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,15 @@ public class PerfilController {
     public Perfil guardar(@RequestBody  PerfilCrearDTO perfil) throws Exception {
         Perfil perfilGuardado = perfilService.guardar(perfil);
         return perfilGuardado;
+    }
+
+
+    @PutMapping("/edit")
+    public ResponseEntity<String> guardar(@RequestHeader("Authorization") String token,
+                                          @RequestBody  PerfilDatosDTO dto) throws Exception {
+        Perfil perfil = jwtService.extraerPerfilToken(token);
+        perfilService.editarPerfil(dto,perfil);
+        return ResponseEntity.ok("Perfil Editado Correctamente");
     }
 
 

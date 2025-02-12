@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExperienciaEducativaDTO {
+
+    private Integer id;
     private String centroEducativo;
     private String curso;
     private String fechaInicio;

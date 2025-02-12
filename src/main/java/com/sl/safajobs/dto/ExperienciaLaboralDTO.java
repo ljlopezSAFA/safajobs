@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ExperienciaLaboralDTO {
 
+    private Integer id;
     private String puesto;
     private String fechaInicio;
     private String fechaFin;
+    private Integer idEmpresa;
     private String empresa;
     private String logoEmpresa;
 

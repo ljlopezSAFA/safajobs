@@ -60,6 +60,14 @@ public class Perfil {
     @OneToMany(targetEntity = Publicacion.class, mappedBy = "perfil")
     private Set<Publicacion> publicacion;
 
+    @OneToMany(targetEntity = ExperienciaEducativa.class, mappedBy = "perfil", cascade = CascadeType.ALL)
+    private Set<ExperienciaEducativa> experienciaEducativa;
+
+
+    @OneToMany(targetEntity = ExperienciaLaboral.class, mappedBy = "perfil", cascade = CascadeType.ALL)
+    private Set<ExperienciaLaboral> experienciaLaboral;
+
+
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
