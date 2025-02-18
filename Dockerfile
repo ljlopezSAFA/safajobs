@@ -1,5 +1,4 @@
 # Usa una imagen oficial de OpenJDK con Maven
-# Usa una imagen oficial de OpenJDK con Maven
 FROM amazoncorretto:21-alpine-jdk
 
 # Establece el directorio de trabajo dentro del contenedor

@@ -160,6 +160,9 @@
                             <version>0.2.0</version>
                         </dependency>
                     </annotationProcessorPaths>
+
+                    <encoding>UTF-8</encoding>
+
                     <compilerArgs>
                         <compilerArg>
                             -Amapstruct.defaultComponentModel=spring
